@@ -1,0 +1,53 @@
+
+QCheckBox {
+    spacing: 8px;
+    color: {{neutral_090}}; /* Цвет текста */
+}
+
+/* Стиль для индикатора */
+QCheckBox::indicator {
+    width: 20px;
+    height: 20px;
+    background-color: {{neutral_000}}; 
+    border: 2px solid {{accent_060}};
+    border-radius: 4px;
+}
+
+/* Состояние "не выбрано" */
+QCheckBox::indicator:unchecked {
+    background-color: {{neutral_000}}; 
+    border: 2px solid {{accent_060}};
+}
+
+/* Состояние "выбрано" */
+QCheckBox::indicator:checked {
+    background-color: {{accent_060}}; 
+    border: 2px solid {{accent_060}};
+    image: url(:/Check_special);
+}
+
+
+
+/* Состояние "наведено" */
+QCheckBox::indicator:unchecked:hover {
+    background-color: {{neutral_000}}; 
+    border: 2px solid {{accent_070}}; 
+
+}
+
+/* Состояние "наведено" */
+QCheckBox::indicator:checked:hover {
+    background-color: {{accent_070}}; 
+    border: 2px solid {{accent_070}}; 
+
+}
+
+/* Состояние "активно" (при клике) */
+QCheckBox:pressed {
+
+}
+
+/* Стиль текста при активном состоянии */
+QCheckBox::checked {
+    font-weight: bold; /* Жирный текст */
+}

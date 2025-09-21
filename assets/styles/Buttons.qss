@@ -1,0 +1,104 @@
+AnimatedIconButton {
+    background-color: transparent;
+    border: none;
+    padding: 0px;
+}
+
+
+QPushButton[ButtonType="Default"] {
+    border: 0px;
+    border-radius: 8px;
+}
+
+QPushButton[Size="IconOnly"] {
+    padding: 12px;
+}
+
+
+QPushButton[Size="L"] {
+    padding: 10px 24px;
+    font-size: 16px;
+    font-family: 'Inter';
+}
+
+QPushButton[Size="M"] {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-family: 'Inter';
+}
+
+QPushButton[Variant="primary"] {
+    background-color: {{accent.default}};
+    color: {{accent.on-accent}}; 
+}
+
+QPushButton[Variant="primary"]:hover {
+    background-color: {{accent.hover}};
+}
+
+QPushButton[Variant="primary"]:pressed {
+    background-color: {{accent.active}};
+}
+
+QPushButton[Variant="primary"]:disabled {
+    background-color: {{bg.disabled}};
+    color: {{fg.disabled}};
+}
+
+QPushButton[Variant="secondary"] {
+    background-color: {{accent_010}};
+    color: {{accent.default}};
+}
+
+QPushButton[Variant="secondary"]:hover {
+    background-color: {{accent_020}};
+    color: {{accent.hover}};
+}
+
+QPushButton[Variant="secondary"]:pressed {
+    background-color: {{accent_030}};
+    color: {{accent.active}};
+}
+
+QPushButton[Variant="secondary"]:disabled {
+    background-color: {{bg.disabled}};
+    color: {{fg.disabled}};
+}
+
+
+QPushButton[Variant="outline"] {
+    background-color: transparent;
+    border-style: solid;
+    border-color: {{accent.default}};
+    border-width: 1.5px;
+    color: {{accent.default}};
+}
+
+QPushButton[Variant="outline"]:hover {
+    border-color: {{accent.hover}};
+    color: {{accent.hover}};
+}
+
+QPushButton[Variant="outline"]:pressed {
+    border-color: {{accent.active}};
+    color: {{accent.active}};
+}
+
+QPushButton[Variant="outline"]:disabled {
+    border-color: {{fg.disabled}};
+    color: {{fg.disabled}};
+}
+
+
+CloseButton {
+    color: {{fg.secondary}};
+}
+
+CloseButton {
+    color: {{fg.secondary}};
+} 
+
+QPushButton[Variant="red"] {
+    color: {{accent_000}};
+    background-color: {{error_060}}
+}

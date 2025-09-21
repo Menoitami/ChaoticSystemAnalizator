@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>buttons_example</class>
+ <widget class="QWidget" name="buttons_example">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>704</width>
+    <height>639</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="6" column="0">
+    <widget class="QPushButton" name="pushButton_11">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>OutLine L Disabled</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>outline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QPushButton" name="pushButton_7">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Secondary L Disabled</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>secondary</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Secondary L Default</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>secondary</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QPushButton" name="pushButton_5">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Primary L Disabled</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>primary</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1">
+    <widget class="QPushButton" name="pushButton_8">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Secondary M Disabled</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>M</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>secondary</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QPushButton" name="pushButton_12">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>OutLine L Default</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>outline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="2">
+    <widget class="AnimatedIconButton" name="pushButton_22">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>OutLine L Disabled Icon</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>outline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="pushButton_9">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>OutLine M Default</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>M</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>outline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="AnimatedIconButton" name="pushButton_19">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Secondary L Disabled Icon</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>secondary</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="2">
+    <widget class="AnimatedIconButton" name="pushButton_15">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Secondary L Icon</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>secondary</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="pushButton_6">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Primary M Disabled</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>primary</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>M</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>иконки задаются в через ui-&gt;btn14-&gt;setSvgIconPath() кнопки promote to AnimatedIconButton</string>
+     </property>
+     <property name="wordWrap">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="AnimatedIconButton" name="pushButton_18">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="mouseTracking">
+      <bool>true</bool>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>OutLine L Icon</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>outline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="2">
+    <widget class="AnimatedIconButton" name="pushButton_23">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Primary L Disabled Icon</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>primary</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Secondary M Default</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>M</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>secondary</string>
+     </property>
+    </widget>
+   </item>
+   <item row="6" column="1">
+    <widget class="QPushButton" name="pushButton_10">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>OutLine M Disabled</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>M</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>outline</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="2">
+    <widget class="AnimatedIconButton" name="pushButton_14">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="mouseTracking">
+      <bool>false</bool>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Primary L Icon</string>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>24</width>
+       <height>24</height>
+      </size>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>primary</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+     <property name="hoverColor" stdset="0">
+      <color>
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="defaultColor" stdset="0">
+      <color>
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+     <property name="pressedColor" stdset="0">
+      <color>
+       <red>0</red>
+       <green>0</green>
+       <blue>0</blue>
+      </color>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="pushButton_3">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Primary M Default</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>primary</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>M</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QPushButton" name="pushButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="autoFillBackground">
+      <bool>true</bool>
+     </property>
+     <property name="text">
+      <string>Primary L Default</string>
+     </property>
+     <property name="Variant" stdset="0">
+      <string>primary</string>
+     </property>
+     <property name="ButtonType" stdset="0">
+      <string>Default</string>
+     </property>
+     <property name="Size" stdset="0">
+      <string>L</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>AnimatedIconButton</class>
+   <extends>QPushButton</extends>
+   <header>animatediconbuttons.h</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

@@ -1,0 +1,50 @@
+<RCC>
+    <qresource prefix="/">
+        <file alias="Plus_24">icons/24/plus.svg</file>
+        <file alias="Close_24">icons/24/Property 1=Action, Property 2=Close.svg</file>
+        <file alias="Close_24_hover">icons/24/Property 1=Action, Property 2=Close-1.svg</file>
+        <file alias="Close_28">icons/28/Action/Close.svg</file>
+        <file alias="File_28">icons/28/Action/File.svg</file>
+        <file alias="Folder_28">icons/28/Action/Folder.svg</file>
+        <file alias="Save_28">icons/28/Action/Save.svg</file>
+        <file alias="Sensor_error">icons/Sensor_error.svg</file>
+        <file alias="Sensor_nosignal">icons/Sensor_nosignal.svg</file>
+        <file alias="Sensor_success">icons/Sensor_success.svg</file>
+        <file alias="Sensor_warning">icons/Sensor_warning.svg</file>
+        <file alias="Plus_20_black">icons/20/plus_black.png</file>
+        <file alias="Plus_20_white">icons/20/plus_white.svg</file>
+        <file alias="edit_20">icons/20/Icon.svg</file>
+        <file alias="trash_20">icons/20/Trash.svg</file>
+        <file alias="arrow-up_20">icons/20/Union.svg</file>
+        <file alias="arrow-down_20">icons/20/Union2.svg</file>
+        <file>icons/ColorWindow.svg</file>
+        <file alias="Drag">icons/Drag.svg</file>
+        <file alias="Trash">icons/Trash.svg</file>
+        <file alias="Settings">icons/Settings.svg</file>
+        <file alias="Check">icons/Check.svg</file>
+        <file alias="Arrow_Down">icons/Arrow_Down.svg</file>
+        <file alias="Arrow_Up">icons/Arrow_Up.svg</file>
+        <file alias="copy">icons/20/copy.svg</file>
+        <file alias="RadioBtnDefault">icons/RadioBtnDefault.svg</file>
+        <file alias="RadioBtnDisable_selected">icons/RadioBtnDisable_selected.svg</file>
+        <file alias="RadioBtnDisable_unselected">icons/RadioBtnDisable_unselected.svg</file>
+        <file alias="RadioBtnHover">icons/RadioBtnHover.svg</file>
+        <file alias="RadioBtnHover_selected">icons/RadioBtnHover_selected.svg</file>
+        <file alias="RadioBtnSelected">icons/RadioBtnSelected.svg</file>
+        <file alias="Check_special">icons/Check_special.svg</file>
+        <file alias="Success">icons/Success.svg</file>
+        <file>icons/trash_white.svg</file>
+        <file alias="error">icons/Error.svg</file>
+        <file alias="file_download">icons/file_dowload.svg</file>
+        <file alias="file_edit">icons/file_edit.svg</file>
+        <file alias="Edit">icons/Edit.svg</file>
+        <file alias="StartScreen">icons/startScreen.svg</file>
+        <file alias="File">icons/File.svg</file>
+        <file alias="Folder">icons/Folder.svg</file>
+        <file alias="Clock">icons/Clock.svg</file>
+        <file alias="Question">icons/Question.svg</file>
+        <file>icons/mainIcon/LetiIcon.png</file>
+        <file>icons/buttonIcons/system.svg</file>
+        <file>icons/figureBracket.svg</file>
+    </qresource>
+</RCC>

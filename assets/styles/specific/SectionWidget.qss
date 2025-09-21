@@ -1,0 +1,58 @@
+
+/* === Заголовки разделов === */
+SectionWidget QLabel {
+    min-height: 24px;
+    max-height: 24px;
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: 400;
+    color: {{neutral_090}};
+    margin-top: 8px;
+    margin-bottom: 0px;
+    qproperty-alignment: AlignCenter;
+    background-color: {{neutral_005}};
+    border-radius: 4;
+}
+
+SectionWidget QToolButton{
+    min-width: 108px;
+    min-height: 76px;
+    font-family: Inter;
+    font-size: 14px;
+    color: {{neutral_090}};
+    border-radius: 4px;
+    text-align: center;
+    padding-right: 8px;
+    padding-left: 8px;
+    margin-right: 4px;
+    margin-left: 4px;
+    border: 1px solid transparent;
+}
+
+/* === Кнопки === */
+SectionWidget QToolButton[hasIcon="true"] {
+    padding-top: 6px;
+}
+SectionWidget QToolButton[hasIcon="false"] {
+
+}
+/* === Эффект наведения === */
+
+SectionWidget QToolButton:hover {
+    color: {{accent.hover}};
+}
+
+/* === Активная кнопка === */
+SectionWidget QToolButton:pressed {
+    color: {{accent.active}};
+}
+
+/* === Удаление стандартных границ === */
+SectionWidget QToolButton:focus {
+    outline: none;
+}
+
+SectionWidget QToolButton:disabled {
+    color: rgb(100, 100, 100)
+}
+

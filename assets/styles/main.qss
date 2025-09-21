@@ -1,0 +1,54 @@
+QWidget#buttons_example{
+    background-color: {{accent_000}};
+}
+
+QMainWindow {
+    padding: 0px;
+    margin: 0px;
+}
+
+
+QScrollBar:vertical {
+    background-color: {{neutral_005}};
+    border:1px solid transparent;
+    border-radius: 3px;
+    width: 8px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: {{neutral_030}};
+     border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+QScrollBar::add-line, QScrollBar::sub-line,
+QScrollBar::add-page, QScrollBar::sub-page {
+    background-color: transparent;
+    border: none;
+}
+
+
+#Geometry QLabel {
+    color: {{neutral_090}}; 
+    
+    font-family: "Inter";  
+    font-size: 14px;  
+}
+
+
+
+QLabel[LabelType="Tip"] {
+    color: {{neutral_060}};
+    font-family: Inter;
+    font-size: 16px;
+}
+
+QLabel[LabelType="Separator"] {
+    background-color: {{accent_010}};
+    font-family: "Inter";
+    font-size: 16px;
+    padding:4px 12px;
+}
+
+
+

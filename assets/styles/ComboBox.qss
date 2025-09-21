@@ -1,0 +1,33 @@
+QComboBox {
+    border: 1.5px solid {{border.default}};
+    border-radius: 6px;
+    font-family: Inter;
+    font-size: 16px;
+    padding-left: 5px;
+    color: {{fg.primary}};
+    combobox-popup: 0;
+}
+
+QComboBox::drop-down {
+    border: none;
+    background-color: transparent;
+    right: 7px;
+}
+
+QComboBox::down-arrow {
+    image: url(:/arrow-down_20);
+    width: 10px;
+    height: 6px;
+}
+
+
+QComboBox QAbstractItemView {
+    border: 1.5px solid {{neutral_020}};
+    border-radius: 8px;
+
+    background-color: white;
+
+    padding: 4px;
+
+    outline: none;
+}

@@ -1,0 +1,37 @@
+/* См. Дизайн систему. */
+/* TODO: добавить состояние error */
+
+
+QPlainTextEdit {
+    background-color: {{accent_000}}; 
+    color: {{neutral_090}};
+    font-size: 14px; 
+    font-family: "Inter";
+    padding: 2px 6px;
+    border: 1.5px solid {{neutral_020}};
+    border-radius: 6px; 
+    margin: 0px;
+}
+
+
+QPlainTextEdit::placeholder {
+    color: {{neutral_030}};
+}
+
+QPlainTextEdit:focus {
+    border: 1px solid {{accent.default}};
+    color: {{neutral_090}};
+}
+
+QPlainTextEdit:hover {
+    border: 1px solid {{accent.default}};
+    color: {{neutral_090}};
+}
+
+QPlainTextEdit:disabled {
+    
+    border: none; 
+    background-color: {{bg.disabled}};
+    color: {{fg.disabled}};
+}
+

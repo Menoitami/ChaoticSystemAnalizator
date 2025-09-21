@@ -1,0 +1,21 @@
+
+
+
+/* Прогресс-бар */
+QProgressBar {
+    border: 1px solid transparent;
+    border-radius: 3px;
+    background-color: {{neutral_020}};
+    height: 6px; 
+    text-align: center;
+    color: transparent;
+}
+
+QProgressBar::chunk {
+
+    background-color: red;
+    border: 4px solid {{accent_060}}; /* Тонкий бордер того же цвета */
+    width: 1px; 
+    margin: 0px; 
+    border-radius: 3px;
+}

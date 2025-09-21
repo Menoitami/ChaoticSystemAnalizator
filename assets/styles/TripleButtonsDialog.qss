@@ -1,0 +1,26 @@
+#TripleButtonsDialog QLabel#header{
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "Inter";
+    color: {{fg.primary}};
+    padding: 0;
+    margin: 0;
+}
+
+ #content{
+    font-family: "Inter";
+    color: {{neutral_060}};
+    font-size: 16px;
+    padding-right: 30px;
+    padding-left: 30px;
+    padding-top: 0px;
+    padding-bottom: 10px;
+}
+
+#TripleButtonsDialog {
+    background-color: {{neutral_000}};
+    border-radius: 16px;
+    border: 1px solid {{border.default}}; 
+}
+
+

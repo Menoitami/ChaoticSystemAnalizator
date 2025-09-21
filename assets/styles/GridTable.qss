@@ -1,0 +1,24 @@
+QLabel[Table="header"] {
+    font-size: 12px;
+    background-color: {{accent_010}};
+
+    padding:  4px 16px;
+
+}
+
+QLabel[Table="accent"] {
+    font-size: 14px;
+    background-color: {{neutral_005}};
+    padding: 4px 8px ;
+}
+
+
+QLabel[Table="default"] {
+    font-size: 14px;
+    background-color: {{success_000}};
+    padding: 4px 8px ;
+}
+
+QScrollArea {
+    border: none;
+}

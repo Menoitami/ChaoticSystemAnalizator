@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/">
+        <file>styles/main.qss</file>
+        <file>styles/Input.qss</file>
+        <file>styles/TextArea.qss</file>
+        <file>styles/Buttons.qss</file>
+        <file>styles/specific/TemplateFieldWidget.qss</file>
+        <file>styles/CustomDialog.qss</file>
+        <file>styles/ComboBox.qss</file>
+        <file>styles/ProgressBar.qss</file>
+        <file>styles/TripleButtonsDialog.qss</file>
+        <file>styles/GridTable.qss</file>
+        <file>styles/CheckBox.qss</file>
+        <file>styles/specific/TabWidget.qss</file>
+        <file>styles/SpinBox.qss</file>
+        <file>styles/RadioButton.qss</file>
+        <file>styles/specific/MenuWidget.qss</file>
+        <file>styles/specific/SectionWidget.qss</file>
+    </qresource>
+</RCC>

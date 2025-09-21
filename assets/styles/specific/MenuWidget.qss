@@ -1,0 +1,47 @@
+QTabBar {
+    qproperty-expanding: true;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+/* === Стили для заголовков вкладок === */
+QTabBar::tab {
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    border-bottom-width: 1.5px; /* Толщина рамки снизу */
+    background: {{success_000}};
+    color: {{fg.primary}};
+    padding-top: 10px;
+    padding-right: 24px;
+    padding-bottom: 15px;
+    padding-left: 24px;
+    margin-right: 8px; /* Имитация gap между вкладками */
+    border-radius: 0px;
+}
+
+
+/* Стиль активной вкладки */
+QTabBar::tab:selected {
+    border-bottom: 2px solid {{accent.hover}}; /* Голубая полоса под активной вкладкой */
+    color: {{accent.hover}};
+    padding-bottom: 15px;
+}
+
+QTabBar::tab:hover {
+    color: {{accent.default}};
+}
+
+QTabBar::tab:disabled {
+    color: {{neutral_020}};
+    background: transparent;
+}
+
+QTabWidget::pane {
+    border-top: 1px solid {{neutral_020}}; 
+}
+
+MenuWidget{
+ background-color: {{success_000}};
+}
+

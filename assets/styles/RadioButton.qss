@@ -1,0 +1,35 @@
+
+QRadioButton {
+    padding-bottom: 5px;
+
+}
+
+QRadioButton::indicator {
+    height: 24px;
+    width: 24px;
+    subcontrol-origin: padding;
+}
+
+QRadioButton::indicator::off {
+    image: url(:/RadioBtnDefault);
+}
+
+QRadioButton::indicator::on {
+    image: url(:/RadioBtnSelected);
+}
+
+QRadioButton::indicator:enabled:hover::off {
+    image: url(:/RadioBtnHover);
+}
+
+QRadioButton::indicator:enabled:hover::on {
+    image: url(:/RadioBtnHover_selected);
+}
+
+QRadioButton::indicator:disabled::off {
+    image: url(:/RadioBtnDisable_unselected);
+}
+
+QRadioButton::indicator:disabled::on {
+    image: url(:/RadioBtnDisable_selected);
+}

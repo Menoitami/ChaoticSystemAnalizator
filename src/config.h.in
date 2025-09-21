@@ -1,0 +1,6 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+
+#define PYTHON_SCHEME_SCRIPT "@PYTHON_SCHEME_SCRIPT@"
+
+#endif // CONFIG_H

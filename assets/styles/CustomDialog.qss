@@ -1,0 +1,33 @@
+#CustomDialog QLabel#header{
+    font-size: 20px;
+    font-weight: 400;
+    font-family: "Inter";
+    color: {{fg.primary}};
+    padding: 0;
+    margin: 0;
+}
+
+#CustomDialog #content {
+    font-family: "Inter";
+    color: {{fg.primary}};
+    font-size: 16px;
+}
+
+#CustomDialog {
+    background-color: {{neutral_000}};
+    border-radius: 16px;
+    border: 1px solid {{border.default}}; 
+}
+
+
+QWidget[Type = "main"]{
+    background-color: transparent;
+}
+
+
+QWidget[Type = "sub"]{
+    background-color: {{neutral_000}};
+    border-radius: 16px;
+    border: 1px solid {{border.default}};
+}
+

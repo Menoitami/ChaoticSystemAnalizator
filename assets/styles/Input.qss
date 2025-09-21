@@ -1,0 +1,79 @@
+/* См. Дизайн систему. */
+
+LineEdit {
+    margin: 0px;
+}
+
+LineEdit QLineEdit {
+    border-radius: 6px; 
+    border-width: 1.5px;
+    border-style: solid;
+
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 8px;
+    padding-right: 8px;
+
+    margin: 0px;
+    font-family: "Inter";
+    font-size: 16px;
+    color: {{fg.primary}};
+}
+
+LineEdit QLineEdit:disabled {
+    
+    border: none; 
+    background-color: {{bg.disabled}};
+    color: {{fg.disabled}};
+}
+
+LineEdit QLineEdit[State="Normal"] {
+    
+    border-color: {{border.default}}; 
+    background-image: none;
+}
+
+LineEdit QLineEdit:focus{
+    
+    border-color: {{accent.default}}; 
+}
+
+LineEdit QLineEdit:hover{
+    
+    border-color: {{accent.default}}; 
+}
+
+LineEdit QLineEdit[State="Error"] {
+    
+    border-color: {{error_060}}; 
+    background-image: url(:/Sensor_error);
+    background-position: right center;
+    background-repeat: no-repeat;
+    background-origin: padding;
+    padding-right: 26px;
+}
+
+LineEdit QLabel#label:disabled {
+    
+    color: {{fg.disabled}};
+}
+
+
+LineEdit QLabel#error{
+    padding: 0;
+    margin:0;
+    padding-top: 4px;
+    padding-left: 12px;
+    font-family: "Inter";
+    color: {{error_060}};
+    line-height: 20px;
+    font-size: 12px;
+}
+
+LineEdit QLabel#label{
+    color: {{fg.secondary}};
+    font-size: 14px;
+    line-height: 16px;
+    
+    padding-bottom: 4px;
+}
