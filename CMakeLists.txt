@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-project(SystemsAnalitic VERSION 0.1 LANGUAGES CXX)
+project(SystemsAnalytic VERSION 0.1 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -44,11 +44,11 @@ qt6_wrap_cpp(MOC_SOURCES ${HEADERS})
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
-add_executable(SystemsAnalitic
+add_executable(SystemsAnalytic
     ${SOURCE_DIR}/main.cpp  ${SOURCES} ${HEADERS} ${MOC_SOURCES}  ${RESOURCES_RCC} ${UI}
 )
 
-target_include_directories(SystemsAnalitic PRIVATE
+target_include_directories(SystemsAnalytic PRIVATE
     ${SOURCE_DIR}/
     ${SOURCE_DIR}/field_window_widgets
     ${SOURCE_DIR}/managers
@@ -67,17 +67,17 @@ target_include_directories(SystemsAnalitic PRIVATE
     # ${QWT_ROOT}/include
 )
 
-target_include_directories(SystemsAnalitic PRIVATE ${CMAKE_BINARY_DIR})
+target_include_directories(SystemsAnalytic PRIVATE ${CMAKE_BINARY_DIR})
 
 # include_directories( ${QWT_ROOT}/src )
 # include_directories( ${QWT_ROOT}/classincludes )
 
 # target_link_directories (v PUBLIC ${QWT_ROOT}/lib)
-target_link_libraries(SystemsAnalitic PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
-target_link_libraries(SystemsAnalitic PRIVATE Qt6::Widgets)
+target_link_libraries(SystemsAnalytic PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
+target_link_libraries(SystemsAnalytic PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
 
 include(GNUInstallDirs)
-install(TARGETS SystemsAnalitic
+install(TARGETS SystemsAnalytic
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
@@ -106,5 +106,5 @@ if(GIT_FOUND AND EXISTS "${CMAKE_SOURCE_DIR}/.git")
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
-    qt_finalize_executable(SystemsAnalitic)
+    qt_finalize_executable(SystemsAnalytic)
 endif()
