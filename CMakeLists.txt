@@ -12,6 +12,9 @@ set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(PYTHON_SCHEME_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/SystemChecker/run_scheme.py)
 # set(QWT_ROOT = C:/Qwt-6.3.0)
 
+add_subdirectory(AnalyticsBackend)
+
+
 set(PYTHON_SCHEME_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/SystemChecker/run_scheme.py)
 
 configure_file(
@@ -102,7 +105,7 @@ if(GIT_FOUND AND EXISTS "${CMAKE_SOURCE_DIR}/.git")
     set(VERSION_STRING "${GIT_BRANCH}-${GIT_HASH}")
 
     # Создаём файл version
-    file(WRITE "${CMAKE_BINARY_DIR}/version" "${VERSION_STRING}\n")
+#    file(WRITE "${CMAKE_BINARY_DIR}/version" "${VERSION_STRING}\n") Art: Этот файл ломает мне сборку
 endif()
 
 if(QT_VERSION_MAJOR EQUAL 6)
