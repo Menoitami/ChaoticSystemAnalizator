@@ -1,9 +1,8 @@
-#include "inputs_example.h"
+﻿#include "inputs_example.h"
 #include "ui_inputs_example.h"
 
 #include <QDoubleValidator>
 #include <QSet>
-
 Inputs_example::Inputs_example(QWidget *parent) : QWidget(parent), ui(new Ui::Inputs_example)
 {
     ui->setupUi(this);
@@ -25,7 +24,7 @@ Inputs_example::Inputs_example(QWidget *parent) : QWidget(parent), ui(new Ui::In
     ui->widget_4->setLabel("ip format, show intermidiate as error");
     ui->widget_4->setRestrictInputValidator(validatorIP, true);
 
-    QVector allEdits = {ui->cross1, ui->cross2};
+    QVector<LineEdit*> allEdits = {ui->cross1, ui->cross2};
     for (auto *currentEdit : allEdits)
     {
         currentEdit->addCrossValidator("Имя должно быть уникальным",
