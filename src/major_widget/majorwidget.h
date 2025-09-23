@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QPushButton>
 #include <QWidget>
@@ -8,6 +8,7 @@
 #include "menuwidget.h"
 #include "systemmanager.h"
 #include <QStackedLayout>
+#include <FrontendBase.hpp>
 
 namespace Ui
 {
@@ -38,6 +39,7 @@ class MajorWidget : public QWidget
     QStackedLayout *mainStackedLayout;
 
     SystemManager *systemManager;
+    QSharedPointer<FrontendBase> m_frontend;
 
   private:
     void registerWidgets();

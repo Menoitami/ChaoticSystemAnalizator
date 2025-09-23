@@ -17,17 +17,13 @@
     __host__ __device__ inline void calcDiscreteModel(double* x, const double* a, double h) {
         double h1 = 0.5 * h + a[0];
         double h2 = 0.5 * h - a[0];
-
         x[0] = h1 * (-x[1] - x[2]) + x[0];
         x[1] = h1 * (x[0] + a[1] * x[1]) + x[1];
         x[2] = h1 * (a[2] + x[2] * (x[0] - a[3])) + x[2];
-
         double temp = -h2 * (x[0] - a[3]) + 1.0;
         x[2] = (h2 * a[2] + x[2]) / temp;
-
         temp = -h2 * a[1] + 1.0;
         x[1] = (h2 * x[0] + x[1]) / temp;
-
         x[0] = h2 * (-x[1] - x[2]) + x[0];
     }
 

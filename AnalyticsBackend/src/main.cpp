@@ -7,13 +7,10 @@
 #endif
 
 
-
-
-
 int main(){
-    std::cout << "start";
+    std::cout << "start"<< std::endl;
     CALC_METHOD();
-    std::cout << "end";
+    std::cout << "end"<< std::endl;
 
     return 0;
 }

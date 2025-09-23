@@ -1,4 +1,4 @@
-#include "majorwidget.h"
+﻿#include "majorwidget.h"
 #include "examplewidget.h"
 #include "phaseportrait.h"
 #include "systemsettings.h"
@@ -31,6 +31,8 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     registerWidgets();
     addMenu();
     connects();
+    m_frontend = QSharedPointer<FrontendBase>::create(8080);
+
 }
 
 MajorWidget::~MajorWidget() { delete ui; }
