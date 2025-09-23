@@ -1,16 +1,12 @@
-#pragma once
+﻿#pragma once
+#include "system.hpp"
+
+#include <vector>
 
 namespace Backend
 {
+    void generateAttractor(const double* a, double h, int iterations,const double* initialState);
 
-class BackendMain
-{
-  public:
-    BackendMain();
+    void saveAttractor(std::vector<std::array<double, 3>> points);
 
-    ~BackendMain();
-
-  private:
-
-};
 }
