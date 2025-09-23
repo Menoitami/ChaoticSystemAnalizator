@@ -25,9 +25,12 @@ configure_file(
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Svg)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg)
 #find_package(nlohmann_json REQUIRED)
-#find_package(VTK REQUIRED)
 
-#include(${VTK_USE_FILE})
+
+set(CMAKE_PREFIX_PATH "C:/Users/user/vcpkg/installed/x64-windows")
+set(VTK_DIR "C:/Users/user/vcpkg/installed/x64-windows/share/vtk")
+
+find_package(VTK REQUIRED)
 
 
 file(GLOB_RECURSE UI
@@ -80,6 +83,7 @@ target_include_directories(SystemsAnalytic PRIVATE
 )
 target_include_directories(SystemsAnalytic PRIVATE ${CMAKE_BINARY_DIR})
 
+target_link_libraries(SystemsAnalytic PRIVATE ${VTK_LIBRARIES})
 target_link_libraries(SystemsAnalytic PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Svg
