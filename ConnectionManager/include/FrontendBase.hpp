@@ -8,10 +8,11 @@
 class FrontendBase {
   public:
     FrontendBase(int port);
-    void waitForConnection();
-
+    ~FrontendBase();
+    void run(); // запускает основной цикл (вместо waitForConnection)
   private:
-    SOCKET server_sock;
     int port;
+    SOCKET server_sock = INVALID_SOCKET;
+    void handleClient(SOCKET client_sock);
 };
 

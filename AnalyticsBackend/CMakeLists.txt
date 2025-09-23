@@ -7,7 +7,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 set(SOURCE_FILES
    src/BackendMain.cpp
 )
@@ -29,6 +28,12 @@ add_executable(AnalyticsBackend
 
 find_package(CUDA REQUIRED)
 include_directories(${CUDA_INCLUDE_DIRS})
+target_include_directories(AnalyticsBackend PRIVATE
+    ${CMAKE_CURRENT_SOURCE_DIR}/../ConnectionManager/include
+
+)
+target_link_libraries(AnalyticsBackend PUBLIC
+    ${CMAKE_CURRENT_BINARY_DIR}/../ConnectionManager/ConnectionManager.lib)
 
 target_link_libraries(AnalyticsBackend PRIVATE ${CUDA_LIBRARIES})
 target_compile_definitions(AnalyticsBackend PRIVATE

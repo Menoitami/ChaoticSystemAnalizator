@@ -34,3 +34,5 @@ endif()
 target_include_directories(ConnectionManager PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
+install(TARGETS ConnectionManager DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include)

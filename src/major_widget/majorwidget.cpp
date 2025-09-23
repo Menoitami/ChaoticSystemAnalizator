@@ -32,6 +32,7 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     addMenu();
     connects();
     m_frontend = QSharedPointer<FrontendBase>::create(8080);
+    m_frontend->run();
 
 }
 
