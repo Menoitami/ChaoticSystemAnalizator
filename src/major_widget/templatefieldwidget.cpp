@@ -18,7 +18,7 @@ TemplateFieldWidget::TemplateFieldWidget(QWidget *parent) : QWidget(parent), ui(
 
     ui->verticalLayout_2->setAlignment(Qt::AlignTop);
     ui->verticalLayout_3->setAlignment(Qt::AlignTop);
-    makeShadow(this);
+    //makeShadow(this);
     setMouseTracking(true);
     ui->HeadingH3->installEventFilter(this);
 }
