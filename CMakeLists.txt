@@ -11,7 +11,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/src)
 set(PYTHON_SCHEME_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/SystemChecker/run_scheme.py)
 # set(QWT_ROOT = C:/Qwt-6.3.0)
-
+add_subdirectory(AnalyticsBackend)
+add_subdirectory(ConnectionManager)
 
 
 set(PYTHON_SCHEME_SCRIPT ${CMAKE_CURRENT_SOURCE_DIR}/SystemChecker/run_scheme.py)
@@ -52,8 +53,7 @@ qt6_add_resources(RESOURCES_RCC "assets/others.qrc" "assets/pics.qrc" "assets/qm
 qt6_wrap_cpp(MOC_SOURCES ${HEADERS})
 
 
-add_subdirectory(AnalyticsBackend)
-add_subdirectory(ConnectionManager)
+
 
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
@@ -78,7 +78,6 @@ target_include_directories(SystemsAnalytic PRIVATE
     ${SOURCE_DIR}/ui_tools/btns
     ${SOURCE_DIR}/ui_tools/stylesheet_processor
     ${SOURCE_DIR}/ui_tools/dialog_widget
-    ${CMAKE_CURRENT_SOURCE_DIR}/ConnectionManager/include
     # ${QWT_ROOT}/include
 )
 target_include_directories(SystemsAnalytic PRIVATE ${CMAKE_BINARY_DIR})
@@ -90,8 +89,7 @@ target_link_libraries(SystemsAnalytic PRIVATE
     Qt6::Core
     Qt6::Gui
     Qt6::Widgets)
-target_link_libraries(SystemsAnalytic PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}/ConnectionManager/ConnectionManager.lib)
+target_link_libraries(SystemsAnalytic PUBLIC ConnectionManager)
 
 
 include(GNUInstallDirs)

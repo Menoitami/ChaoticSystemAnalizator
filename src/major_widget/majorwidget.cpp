@@ -32,15 +32,15 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     addMenu();
     connects();
 
-    FrontendBase frontend("127.0.0.1", 8080);
-
-    QObject::connect(&frontend, &FrontendBase::dataReceived, [](const QByteArray &b){
+    m_frontend = QSharedPointer<FrontendBase>::create("127.0.0.1", 8080);
+    m_frontend->start();
+    QObject::connect(m_frontend.data(), &FrontendBase::dataReceived, [](const QByteArray &b){
         qDebug() << "Got" << b.size() << "bytes";
     });
-    QObject::connect(&frontend, &FrontendBase::errorOccurred, [](const QString &e){
+    QObject::connect(m_frontend.data(), &FrontendBase::errorOccurred, [](const QString &e){
         qWarning() << e;
     });
-    if (!frontend.start()) {
+    if (!m_frontend->start()) {
         qFatal("Failed to start frontend");
     }
     else qDebug() << "Front is listening";

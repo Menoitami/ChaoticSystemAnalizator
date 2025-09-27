@@ -2,6 +2,7 @@
 
 #include <QByteArray>
 #include <QObject>
+#include <QHostAddress>
 #include <QFuture>
 #include <QFutureWatcher>
 #include <QtConcurrent/QtConcurrent>
@@ -15,32 +16,29 @@
 class FrontendBase : public QObject {
     Q_OBJECT
   public:
-    explicit FrontendBase(const QString& ip = "127.0.0.1", quint16 port = 8080, QObject* parent = nullptr);
-    ~FrontendBase() override;
+    explicit FrontendBase(const QString &ip, quint16 port, QObject *parent = nullptr);
+    ~FrontendBase();
 
     bool start();
     void stop();
     bool isRunning() const { return running.load(); }
-    bool sendMessage(const QByteArray &data);
-
 
   signals:
-    void connected();
-    void dataReceived(const QByteArray& data);
-    void errorOccurred(const QString& err);
+    void dataReceived(const QByteArray &data, const QHostAddress &from, quint16 port);
+    void errorOccurred(const QString &err);
 
   private:
     bool initWinsock();
     void cleanupWinsock();
     bool createAndBind();
-    void listenLoop();
-    void handleClientSocket(SOCKET clientSock);
+    void recvLoop();
 
-    SOCKET server_sock;
-    std::atomic<bool> running;
-    std::thread listener_thread;
+  private:
     QString listen_ip;
     quint16 listen_port;
 
-    SOCKET currentClientSock = INVALID_SOCKET;
+    std::atomic<bool> running;
+    std::thread worker_thread;
+
+    SOCKET sock; // UDP socket
 };

@@ -8,7 +8,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt6 REQUIRED COMPONENTS Core Widgets Concurrent)
+find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network Concurrent)
 
 # Sources and headers
 set(SOURCE_FILES
@@ -29,11 +29,11 @@ add_library(ConnectionManager STATIC
 
 target_include_directories(ConnectionManager
     PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-    PRIVATE ${CMAKE_BINARY_DIR}
+    PUBLIC ${CMAKE_BINARY_DIR}
 )
 
 target_link_libraries(ConnectionManager
-    PRIVATE Qt6::Core Qt6::Concurrent Qt6::Widgets
+    PUBLIC Qt6::Core Qt6::Concurrent Qt6::Network Qt6::Widgets
 )
 
 if(WIN32)
