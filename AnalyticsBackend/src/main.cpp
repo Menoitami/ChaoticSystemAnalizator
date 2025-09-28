@@ -1,4 +1,5 @@
-﻿#include <BackendMain.hpp>
+﻿#include "FrontendBase.hpp"
+#include <BackendMain.hpp>
 #include <BackendTypes.hpp>
 #include <iostream>
 #include <BackendBase.hpp>
@@ -10,9 +11,8 @@
 
 
 int main(){
-    BackendBase back("127.0.0.1",8080);
-    back.start();
-
+    BackendBase back;
+    back.send_custom_messge("asdasdasd");
 
     std::cout << "start"<< std::endl;
     CALC_METHOD();

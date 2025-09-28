@@ -1,145 +1,46 @@
 ﻿#include "FrontendBase.hpp"
+#include "ConnectionTypes.hpp"
+
 #include <QMetaObject>
 #include <QCoreApplication>
-#include <cstring>
 
 FrontendBase::FrontendBase(const QString &ip, quint16 port, QObject *parent)
-    : QObject(parent),
-      listen_ip(ip),
-      listen_port(port),
-      running(false),
-      sock(INVALID_SOCKET)
+    : ConnectionUnit(ip,port,parent)
 {
 }
 
 FrontendBase::~FrontendBase() {
-    stop();
 }
 
-bool FrontendBase::initWinsock() {
-    WSADATA wsaData;
-    int r = WSAStartup(MAKEWORD(2,2), &wsaData);
-    if (r != 0) {
-        QMetaObject::invokeMethod(this, "errorOccurred", Qt::QueuedConnection,
-                                  Q_ARG(QString, QStringLiteral("WSAStartup failed: %1").arg(r)));
-        return false;
-    }
-    return true;
+
+
+void FrontendBase::send_custom_messge(QString str)
+{
+    QByteArray buffer;
+    QDataStream out(&buffer, QIODevice::WriteOnly);
+
+    out << MessageType::test;
+    out << str;
+    sendMessage(buffer);
 }
 
-void FrontendBase::cleanupWinsock() {
-    WSACleanup();
-}
+void FrontendBase::processMessage(const QByteArray &data, const QHostAddress &from, quint16 port)
+{
+    QDataStream in(data);
 
-bool FrontendBase::createAndBind() {
-    sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-    if (sock == INVALID_SOCKET) {
-        QMetaObject::invokeMethod(this, "errorOccurred", Qt::QueuedConnection,
-                                  Q_ARG(QString, QStringLiteral("socket failed: %1").arg(WSAGetLastError())));
-        return false;
+    MessageType mt;
+    in >> mt;
+
+    switch (mt){
+    case MessageType::Unknown:
+    case MessageType::SendSingleAttractorPoint:
+    case MessageType::SendAllAttractorPoints:
+    case MessageType::GetSystem:
+    case MessageType::GetMethod:
+    case MessageType::test:
+        QString text;
+        in >> text;
+        qDebug() << text;
+        break;
     }
-
-    BOOL yes = TRUE;
-    setsockopt(sock, SOL_SOCKET, SO_REUSEADDR, (const char*)&yes, sizeof(yes));
-
-    sockaddr_in addr{};
-    addr.sin_family = AF_INET;
-    addr.sin_port = htons(static_cast<u_short>(listen_port));
-
-    if (listen_ip.isEmpty() || listen_ip == "0.0.0.0") {
-        addr.sin_addr.S_un.S_addr = INADDR_ANY;
-    } else {
-        inet_pton(AF_INET, listen_ip.toStdString().c_str(), &addr.sin_addr);
-    }
-
-    if (bind(sock, reinterpret_cast<sockaddr*>(&addr), sizeof(addr)) == SOCKET_ERROR) {
-        int err = WSAGetLastError();
-        closesocket(sock);
-        sock = INVALID_SOCKET;
-        QMetaObject::invokeMethod(this, "errorOccurred", Qt::QueuedConnection,
-                                  Q_ARG(QString, QStringLiteral("bind failed: %1").arg(err)));
-        return false;
-    }
-
-    u_long mode = 0;
-    ioctlsocket(sock, FIONBIO, &mode);
-    qDebug() << "createAndBind ok, sock=" << sock;
-
-    return true;
-}
-
-void FrontendBase::recvLoop() {
-    const int BUF_SIZE = 65536;
-    std::vector<char> buffer(BUF_SIZE);
-    qDebug() << "starting worker thread";
-
-    while (running.load()) {
-        qDebug() << "front is reading";
-        fd_set readfds;
-        FD_ZERO(&readfds);
-        FD_SET(sock, &readfds);
-        timeval tv;
-        tv.tv_sec = 1;
-        tv.tv_usec = 0;
-
-        int sel = select(0, &readfds, nullptr, nullptr, &tv);
-        if (sel == SOCKET_ERROR) {
-            int err = WSAGetLastError();
-            QMetaObject::invokeMethod(this, "errorOccurred", Qt::QueuedConnection,
-                                      Q_ARG(QString, QStringLiteral("select failed: %1").arg(err)));
-            break;
-        } else if (sel == 0) {
-            continue;
-        }
-
-        if (!FD_ISSET(sock, &readfds)) continue;
-
-        sockaddr_in from{};
-        int fromLen = sizeof(from);
-        int n = recvfrom(sock, buffer.data(), BUF_SIZE, 0, reinterpret_cast<sockaddr*>(&from), &fromLen);
-        if (n == SOCKET_ERROR) {
-            int err = WSAGetLastError();
-            if (err == WSAEWOULDBLOCK || err == WSAETIMEDOUT) continue;
-            QMetaObject::invokeMethod(this, "errorOccurred", Qt::QueuedConnection,
-                                      Q_ARG(QString, QStringLiteral("recvfrom failed: %1").arg(err)));
-            continue;
-        }
-
-        QByteArray data(buffer.data(), n);
-        QHostAddress srcAddr(QString::fromStdString(inet_ntoa(from.sin_addr)));
-        quint16 srcPort = ntohs(from.sin_port);
-
-        QMetaObject::invokeMethod(this, "dataReceived", Qt::QueuedConnection,
-                                  Q_ARG(QByteArray, data),
-                                  Q_ARG(QHostAddress, srcAddr),
-                                  Q_ARG(quint16, srcPort));
-    }
-}
-
-bool FrontendBase::start() {
-    if (running.load()) return true;
-    if (!initWinsock()) return false;
-    if (!createAndBind()) {
-        cleanupWinsock();
-        return false;
-    }
-
-    running.store(true);
-    worker_thread = std::thread([this]() { recvLoop(); });
-
-    return true;
-}
-
-void FrontendBase::stop() {
-    bool expected = true;
-    if (!running.compare_exchange_strong(expected, false)) return;
-
-    if (sock != INVALID_SOCKET) {
-        shutdown(sock, SD_BOTH);
-        closesocket(sock);
-        sock = INVALID_SOCKET;
-    }
-
-    if (worker_thread.joinable()) worker_thread.join();
-    cleanupWinsock();
 }

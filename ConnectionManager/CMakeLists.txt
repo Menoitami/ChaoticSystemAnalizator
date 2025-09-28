@@ -14,11 +14,14 @@ find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network Concurrent)
 set(SOURCE_FILES
     src/BackendBase.cpp
     src/FrontendBase.cpp
+    src/ConnectionUnit.cpp
+
 )
 
 set(HEADER_FILES
     include/BackendBase.hpp
     include/FrontendBase.hpp
+    include/ConnectionUnit.hpp
     include/ConnectionTypes.hpp
 )
 

@@ -1,33 +1,22 @@
 ﻿#pragma once
+#include "ConnectionUnit.hpp"
 #include <QObject>
 #include <QString>
-#include <thread>
-#include <atomic>
 #include <winsock2.h>
 #include <ws2tcpip.h>
 
-class BackendBase : public QObject {
+class BackendBase : public ConnectionUnit {
     Q_OBJECT
   public:
-    explicit BackendBase(const QString &destIp, quint16 destPort, QObject *parent = nullptr);
+    explicit BackendBase(const QString &ip = "127.0.0.1", quint16 port = 8080, QObject *parent = nullptr);
     ~BackendBase();
 
-    bool start();   // инициализация и отправка стартового сообщения
-    void stop();
-
-  signals:
-    void errorOccurred(const QString &msg);
+    void send_custom_messge(QString str);
 
   private:
-    bool initWinsock();
-    void cleanupWinsock();
-    bool createSocket();
-    bool sendOnce(const QByteArray &data);
 
-    QString dest_ip;
-    quint16 dest_port;
-    std::atomic<bool> running;
-    SOCKET sock;
-    sockaddr_in destAddr;
-    std::thread worker_thread;
+    void processMessage(const QByteArray &data, const QHostAddress &from, quint16 port) override;
+
+  private:
+
 };
