@@ -28,12 +28,9 @@ add_executable(AnalyticsBackend
 
 find_package(CUDA REQUIRED)
 include_directories(${CUDA_INCLUDE_DIRS})
-target_include_directories(AnalyticsBackend PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}/../ConnectionManager/include
 
-)
-target_link_libraries(AnalyticsBackend PUBLIC
-    ${CMAKE_CURRENT_BINARY_DIR}/../ConnectionManager/ConnectionManager.lib)
+
+target_link_libraries(AnalyticsBackend PUBLIC ConnectionManager)
 
 target_link_libraries(AnalyticsBackend PRIVATE ${CUDA_LIBRARIES})
 target_compile_definitions(AnalyticsBackend PRIVATE
