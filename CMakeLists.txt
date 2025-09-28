@@ -28,8 +28,8 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Svg)
 #find_package(nlohmann_json REQUIRED)
 
 
-#set(CMAKE_PREFIX_PATH "$ENV{VCPKG_ROOT}/installed/x64-windows")
-#set(VTK_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/vtk")
+set(CMAKE_PREFIX_PATH "$ENV{VCPKG_ROOT}/installed/x64-windows")
+set(VTK_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/vtk")
 
 find_package(VTK REQUIRED)
 
