@@ -1,6 +1,7 @@
 ﻿#include "majorwidget.h"
 #include "examplewidget.h"
-#include "phaseportrait.h"
+#include "phaseportrait2d.h"
+#include "phaseportrait3d.h"
 #include "systemsettings.h"
 #include "ui_majorwidget.h"
 
@@ -31,9 +32,8 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     registerWidgets();
     addMenu();
     connects();
-    m_frontend = QSharedPointer<FrontendBase>::create(8080);
-    m_frontend->run();
-
+    // m_frontend = QSharedPointer<FrontendBase>::create(8080);
+    // m_frontend->run();
 }
 
 MajorWidget::~MajorWidget() { delete ui; }
@@ -42,7 +42,8 @@ void MajorWidget::registerWidgets()
 {
     FieldWidget::registerWidget<ExampleWidget>(SA::CustomWidgets::ExampleWidget);
     FieldWidget::registerWidget<SystemSettings>(SA::CustomWidgets::SystemSettings);
-    FieldWidget::registerWidget<PhasePortrait>(SA::CustomWidgets::PhasePortrait);
+    FieldWidget::registerWidget<PhasePortrait3D>(SA::CustomWidgets::PhasePortrait3D);
+    FieldWidget::registerWidget<PhasePortrait2D>(SA::CustomWidgets::PhasePortrait2D);
 }
 
 void MajorWidget::addMenu()
@@ -55,8 +56,11 @@ void MajorWidget::addMenu()
                              "://icons/buttonIcons/system.svg");
     connectButtonAndBaseWidget(but, SA::CustomWidgets::SystemSettings, mainField.get());
 
-    but = menuWid->addButton(SA::Sections::Graphics, "Графики", "Фазовый портрет");
-    connectButtonAndBaseWidget(but, SA::CustomWidgets::PhasePortrait, mainField.get());
+    but = menuWid->addButton(SA::Sections::Graphics, "Графики", "Фазовый портрет 3D");
+    connectButtonAndBaseWidget(but, SA::CustomWidgets::PhasePortrait3D, mainField.get());
+
+    but = menuWid->addButton(SA::Sections::Graphics, "Графики", "Фазовый портрет 2D");
+    connectButtonAndBaseWidget(but, SA::CustomWidgets::PhasePortrait2D, mainField.get());
 }
 
 void MajorWidget::connectButtonAndBaseWidget(const std::shared_ptr<QToolButton> but, SA::CustomWidgets widget,

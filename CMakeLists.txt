@@ -32,7 +32,6 @@ set(VTK_DIR "$ENV{VCPKG_ROOT}/installed/x64-windows/share/vtk")
 
 find_package(VTK REQUIRED)
 
-
 file(GLOB_RECURSE UI
     ${SOURCE_DIR}/*.ui
 )
@@ -58,6 +57,9 @@ add_subdirectory(ConnectionManager)
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
+# Print VTK libraries for debugging
+# message(STATUS "VTK Libraries: ${VTK_LIBRARIES}")
+
 add_executable(SystemsAnalytic
     ${SOURCE_DIR}/main.cpp  ${SOURCES} ${HEADERS} ${MOC_SOURCES}  ${RESOURCES_RCC} ${UI}
 )
@@ -68,6 +70,7 @@ target_include_directories(SystemsAnalytic PRIVATE
     ${SOURCE_DIR}/managers
     ${SOURCE_DIR}/field_window_widgets/SystemSettings
     ${SOURCE_DIR}/field_window_widgets/PhasePortrait
+    ${SOURCE_DIR}/field_window_widgets/PhasePortrait2D
     ${SOURCE_DIR}/major_widget
     ${SOURCE_DIR}/major_widget/menu
     ${SOURCE_DIR}/major_widget/field
@@ -85,11 +88,15 @@ target_include_directories(SystemsAnalytic PRIVATE ${CMAKE_BINARY_DIR})
 
 target_link_libraries(SystemsAnalytic PRIVATE ${VTK_LIBRARIES})
 target_link_libraries(SystemsAnalytic PRIVATE
+    ${VTK_LIBRARIES}
     Qt${QT_VERSION_MAJOR}::Widgets
     Qt${QT_VERSION_MAJOR}::Svg
     Qt6::Core
     Qt6::Gui
-    Qt6::Widgets)
+    Qt6::Widgets
+)
+
+
 target_link_libraries(SystemsAnalytic PUBLIC
     ${CMAKE_CURRENT_BINARY_DIR}/ConnectionManager/ConnectionManager.lib)
 

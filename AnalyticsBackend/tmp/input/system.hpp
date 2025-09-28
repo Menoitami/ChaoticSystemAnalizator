@@ -38,7 +38,7 @@
         const double eps_bif = 0.001;
         const double eps_lle = 1e-6;
         const int preScaller = 1;
-        const double fixedCT = 100;
+        const double fixedCT = 3000;
         const double fixedResolution = 50;
         const double modelingTime = 500;
         const double fixedNT = 0.4;

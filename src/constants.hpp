@@ -9,10 +9,10 @@ namespace SA
 
 enum class CustomWidgets
 {
-    // Graphics
     ExampleWidget,
     SystemSettings,
-    PhasePortrait
+    PhasePortrait3D,
+    PhasePortrait2D
 };
 
 enum class Sections
