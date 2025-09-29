@@ -3,6 +3,7 @@
 
 #include <QMetaObject>
 #include <QCoreApplication>
+#include <BackendMain.hpp>
 
 BackendBase::BackendBase(const QString &ip, quint16 port, QObject *parent)
     : ConnectionUnit(ip,port,parent)
@@ -35,7 +36,12 @@ void BackendBase::processMessage(const QByteArray &data, const QHostAddress &fro
     case MessageType::Unknown:
     case MessageType::SendSingleAttractorPoint:
     case MessageType::SendAllAttractorPoints:
-    case MessageType::GetSystem:
+    case MessageType::GetSystem:{
+        QString system; in >> system;
+
+        handle_get_system(system);
+        break;
+    }
     case MessageType::GetMethod:
     case MessageType::test:
         QString text;
@@ -43,4 +49,14 @@ void BackendBase::processMessage(const QByteArray &data, const QHostAddress &fro
         qDebug() << text;
         break;
     }
+}
+
+void BackendBase::handle_get_system(QString sys)
+{
+
+
+
+
+
+
 }

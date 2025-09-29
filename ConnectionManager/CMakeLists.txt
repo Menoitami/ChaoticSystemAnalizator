@@ -9,7 +9,6 @@ set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Widgets Network Concurrent)
-
 # Sources and headers
 set(SOURCE_FILES
     src/BackendBase.cpp
@@ -38,7 +37,9 @@ target_include_directories(ConnectionManager
 target_link_libraries(ConnectionManager
     PUBLIC Qt6::Core Qt6::Concurrent Qt6::Network Qt6::Widgets
 )
-
+target_link_libraries(ConnectionManager
+    PUBLIC AnalyticsBackend
+)
 if(WIN32)
     target_link_libraries(ConnectionManager PRIVATE ws2_32)
 endif()

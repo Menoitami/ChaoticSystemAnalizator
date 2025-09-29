@@ -17,6 +17,7 @@ class BackendBase : public ConnectionUnit {
 
     void processMessage(const QByteArray &data, const QHostAddress &from, quint16 port) override;
 
+    void handle_get_system(QString sys);
   private:
 
 };

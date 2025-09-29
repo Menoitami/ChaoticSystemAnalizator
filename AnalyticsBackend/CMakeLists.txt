@@ -7,6 +7,10 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
+find_package(CUDA REQUIRED)
+
+
 set(SOURCE_FILES
    src/BackendMain.cpp
 )
@@ -14,7 +18,7 @@ set(SOURCE_FILES
 set(HEADERS
    include/BackendMain.hpp
    include/BackendTypes.hpp
-   tmp/input/system.hpp
+   tmp/input/system.cuh
 )
 set(OUTPUT_TEMP_PATH "${CMAKE_CURRENT_SOURCE_DIR}/tmp/output/")
 
@@ -23,15 +27,21 @@ include_directories(
    tmp/input
 )
 
-add_executable(AnalyticsBackend
-               src/main.cpp  ${SOURCE_FILES} ${HEADERS})
-
-find_package(CUDA REQUIRED)
-include_directories(${CUDA_INCLUDE_DIRS})
+add_library(AnalyticsBackend STATIC ${SOURCE_FILES} ${HEADERS})
 
 
-target_link_libraries(AnalyticsBackend PUBLIC ConnectionManager)
 
-target_link_libraries(AnalyticsBackend PRIVATE ${CUDA_LIBRARIES})
+target_include_directories(AnalyticsBackend
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+    PUBLIC ${CUDA_INCLUDE_DIRS}
+    PUBLIC ${CMAKE_BINARY_DIR}
+)
+
+target_link_libraries(AnalyticsBackend PUBLIC ${CUDA_LIBRARIES})
+
+
 target_compile_definitions(AnalyticsBackend PRIVATE
    OUTPUT_PATH="${OUTPUT_TEMP_PATH}")
+
+install(TARGETS AnalyticsBackend DESTINATION lib)
+install(DIRECTORY include/ DESTINATION include)
