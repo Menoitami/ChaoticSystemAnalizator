@@ -3,12 +3,6 @@
 #include <QDebug>
 
 void BackendBase::cleanupBackendBase() { delete BackendBase::instance(); }
-#include <BackendMain.hpp>
-
-BackendBase::BackendBase(const QString &ip, quint16 port, QObject *parent)
-    : ConnectionUnit(ip,port,parent)
-{
-}
 
 BackendBase *BackendBase::instance()
 {
@@ -31,14 +25,4 @@ void BackendBase::processMessage(MessageType type, const QByteArray &data)
     Q_UNUSED(data);
 
     qDebug() << "я че то получил";
-}
-
-void BackendBase::handle_get_system(QString sys)
-{
-
-
-
-
-
-
 }
