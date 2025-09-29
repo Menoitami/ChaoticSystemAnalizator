@@ -27,10 +27,14 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     ui->verticalLayout->addWidget(menuWid.get());
     ui->verticalLayout->addLayout(mainStackedLayout);
 
-    // systemManager = SystemManager::instance();
-    // m_frontend = FrontendBase::instance();
+    systemManager = SystemManager::instance();
+    m_frontend = FrontendBase::instance();
 
-    // connect(systemManager, &SystemManager::sendSystemToBack_sig, m_frontend, &FrontendBase::sendMessage);
+    connect(systemManager, &SystemManager::sendSystemToBack_sig, m_frontend, &FrontendBase::sendMessage);
+
+    registerWidgets();
+    addMenu();
+    connects();
 }
 
 MajorWidget::~MajorWidget() { delete ui; }

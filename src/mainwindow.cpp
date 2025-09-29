@@ -1,4 +1,6 @@
 ﻿#include "mainwindow.h"
+#include "BackendBase.hpp"
+#include "FrontendBase.hpp"
 #include "graphic3dwidget.h"
 #include "ui_mainwindow.h"
 #include <qstackedwidget.h>
@@ -16,8 +18,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     setWindowIcon(QIcon("://icons/mainIcon/LetiIcon.png"));
 
-    // auto graphicWid = new Graphic3DWidget(this);
-    // graphicWid->deleteLater();
+    FrontendBase *front = FrontendBase::instance();
+    BackendBase *back = BackendBase::instance();
+
+    connect(front, &FrontendBase::sendMessage, back, &BackendBase::processMessage);
+    connect(back, &BackendBase::sendMessage, front, &FrontendBase::processMessage);
+
+    auto graphicWid = new Graphic3DWidget(this);
+    graphicWid->deleteLater();
 }
 
 MainWindow::~MainWindow() { delete ui; }

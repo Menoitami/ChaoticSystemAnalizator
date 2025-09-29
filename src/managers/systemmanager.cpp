@@ -26,7 +26,11 @@ void SystemManager::setSystem(SA::SystemData &data)
     auto [validSystem, message] = checkScheme(data);
     qDebug() << validSystem << message;
 
-    sysData = data;
+    if (validSystem)
+    {
+        sysData = data;
+        sendSystemToBack();
+    }
 }
 
 std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
@@ -97,7 +101,7 @@ std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
 
     qDebug() << "Launching command:" << "python" << args;
 
-    process.start("python", args);
+    process.start("py", args);
 
     if (!process.waitForStarted(5000))
     {

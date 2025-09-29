@@ -9,7 +9,7 @@ SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_FILE = os.path.join(SCRIPT_DIR, "checkSystem.hpp")
 OUTPUT_EXE = "scheme_test.exe"
 RESULT_FILE = "result.txt"
-GPP = "clang++"  # Ensure g++ is available in PATH
+GPP = "g++"  # Ensure g++ is available in PATH
 
 
 def parse_float_list(s):
