@@ -1,30 +1,28 @@
 ﻿#pragma once
 
-#include "ConnectionUnit.hpp"
-#include <QByteArray>
+#include "ConnectionTypes.hpp"
 #include <QObject>
-#include <QHostAddress>
-#include <QFuture>
-#include <QFutureWatcher>
-#include <QtConcurrent/QtConcurrent>
+#include <QString>
 
-#include <winsock2.h>
-#include <ws2tcpip.h>
-
-#pragma comment(lib, "Ws2_32.lib")
-
-class FrontendBase : public ConnectionUnit {
+class FrontendBase : public QObject
+{
     Q_OBJECT
+
   public:
-    explicit FrontendBase(const QString &ip = "127.0.0.1", quint16 port = 8080, QObject *parent = nullptr);
-    ~FrontendBase();
+    // Запрещаем копирование
+    FrontendBase(const FrontendBase &) = delete;
+    FrontendBase &operator=(const FrontendBase &) = delete;
 
-    void send_custom_messge(QString str);
+    static FrontendBase *instance();
+
+  public slots:
+    void processMessage(MessageType type, const QByteArray &data);
+
+  signals:
+    void sendMessage(MessageType type, const QByteArray &data);
 
   private:
-
-    void processMessage(const QByteArray &data, const QHostAddress &from, quint16 port) override;
-
-  private:
-
+    explicit FrontendBase(QObject *parent = nullptr);
+    ~FrontendBase() override;
+    static void cleanupFrontendBase();
 };

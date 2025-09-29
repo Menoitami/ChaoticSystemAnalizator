@@ -7,8 +7,8 @@
 #include "fieldwidget.h"
 #include "menuwidget.h"
 #include "systemmanager.h"
-#include <QStackedLayout>
 #include <FrontendBase.hpp>
+#include <QStackedLayout>
 
 namespace Ui
 {
@@ -39,7 +39,7 @@ class MajorWidget : public QWidget
     QStackedLayout *mainStackedLayout;
 
     SystemManager *systemManager;
-    QSharedPointer<FrontendBase> m_frontend;
+    FrontendBase *m_frontend;
 
   private:
     void registerWidgets();

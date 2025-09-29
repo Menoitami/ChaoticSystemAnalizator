@@ -2,6 +2,8 @@
 
 #include "constants.hpp"
 #include "systemsettings.h"
+#include <ConnectionTypes.hpp>
+#include <QDataStream>
 #include <QObject>
 
 class SystemManager : public QObject
@@ -31,4 +33,8 @@ class SystemManager : public QObject
   private slots:
 
     void setSystem(SA::SystemData &);
+    void sendSystemToBack();
+
+  signals:
+    void sendSystemToBack_sig(MessageType type, const QByteArray &data);
 };

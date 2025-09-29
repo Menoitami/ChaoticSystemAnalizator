@@ -1,46 +1,28 @@
 ﻿#include "BackendBase.hpp"
-#include "ConnectionTypes.hpp"
-
-#include <QMetaObject>
 #include <QCoreApplication>
+#include <QDebug>
 
-BackendBase::BackendBase(const QString &ip, quint16 port, QObject *parent)
-    : ConnectionUnit(ip,port,parent)
+void BackendBase::cleanupBackendBase() { delete BackendBase::instance(); }
+
+BackendBase *BackendBase::instance()
 {
-}
-
-BackendBase::~BackendBase() {
-}
-
-
-
-void BackendBase::send_custom_messge(QString str)
-{
-    QByteArray buffer;
-    QDataStream out(&buffer, QIODevice::WriteOnly);
-
-    out << MessageType::test;
-    out << str;
-    sendMessage(buffer);
-}
-
-void BackendBase::processMessage(const QByteArray &data, const QHostAddress &from, quint16 port)
-{
-    QDataStream in(data);
-
-    MessageType mt;
-    in >> mt;
-
-    switch (mt){
-    case MessageType::Unknown:
-    case MessageType::SendSingleAttractorPoint:
-    case MessageType::SendAllAttractorPoints:
-    case MessageType::GetSystem:
-    case MessageType::GetMethod:
-    case MessageType::test:
-        QString text;
-        in >> text;
-        qDebug() << text;
-        break;
+    static BackendBase *self = nullptr;
+    if (!self)
+    {
+        self = new BackendBase(qApp);
+        qAddPostRoutine(cleanupBackendBase);
     }
+    return self;
+}
+
+BackendBase::BackendBase(QObject *parent) : QObject(parent) {}
+
+BackendBase::~BackendBase() {}
+
+void BackendBase::processMessage(MessageType type, const QByteArray &data)
+{
+    Q_UNUSED(type);
+    Q_UNUSED(data);
+
+    qDebug() << "я че то получил";
 }

@@ -3,3 +3,4 @@ CMakeLists.txt.user
 .qtcreator
 .vscode
 AnalyticsBackend/tmp/output/*
+CMakeLists.txt.autosave

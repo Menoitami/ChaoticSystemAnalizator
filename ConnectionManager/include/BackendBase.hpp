@@ -1,22 +1,28 @@
 ﻿#pragma once
-#include "ConnectionUnit.hpp"
+
+#include "ConnectionTypes.hpp"
 #include <QObject>
 #include <QString>
-#include <winsock2.h>
-#include <ws2tcpip.h>
 
-class BackendBase : public ConnectionUnit {
+class BackendBase : public QObject
+{
     Q_OBJECT
+
   public:
-    explicit BackendBase(const QString &ip = "127.0.0.1", quint16 port = 8080, QObject *parent = nullptr);
-    ~BackendBase();
+    BackendBase(const BackendBase &) = delete;
+    BackendBase &operator=(const BackendBase &) = delete;
 
-    void send_custom_messge(QString str);
+    static BackendBase *instance();
+
+  public slots:
+    void processMessage(MessageType type, const QByteArray &data);
+
+  signals:
+    void sendMessage(MessageType type, const QByteArray &data);
 
   private:
+    explicit BackendBase(QObject *parent = nullptr);
+    ~BackendBase() override;
 
-    void processMessage(const QByteArray &data, const QHostAddress &from, quint16 port) override;
-
-  private:
-
+    static void cleanupBackendBase();
 };
