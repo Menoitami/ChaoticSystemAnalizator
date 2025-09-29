@@ -1,8 +1,8 @@
 ﻿#include "BackendBase.hpp"
-#include "ConnectionTypes.hpp"
-
-#include <QMetaObject>
 #include <QCoreApplication>
+#include <QDebug>
+
+void BackendBase::cleanupBackendBase() { delete BackendBase::instance(); }
 #include <BackendMain.hpp>
 
 BackendBase::BackendBase(const QString &ip, quint16 port, QObject *parent)
@@ -10,45 +10,27 @@ BackendBase::BackendBase(const QString &ip, quint16 port, QObject *parent)
 {
 }
 
-BackendBase::~BackendBase() {
+BackendBase *BackendBase::instance()
+{
+    static BackendBase *self = nullptr;
+    if (!self)
+    {
+        self = new BackendBase(qApp);
+        qAddPostRoutine(cleanupBackendBase);
+    }
+    return self;
 }
 
+BackendBase::BackendBase(QObject *parent) : QObject(parent) {}
 
+BackendBase::~BackendBase() {}
 
-void BackendBase::send_custom_messge(QString str)
+void BackendBase::processMessage(MessageType type, const QByteArray &data)
 {
-    QByteArray buffer;
-    QDataStream out(&buffer, QIODevice::WriteOnly);
+    Q_UNUSED(type);
+    Q_UNUSED(data);
 
-    out << MessageType::test;
-    out << str;
-    sendMessage(buffer);
-}
-
-void BackendBase::processMessage(const QByteArray &data, const QHostAddress &from, quint16 port)
-{
-    QDataStream in(data);
-
-    MessageType mt;
-    in >> mt;
-
-    switch (mt){
-    case MessageType::Unknown:
-    case MessageType::SendSingleAttractorPoint:
-    case MessageType::SendAllAttractorPoints:
-    case MessageType::GetSystem:{
-        QString system; in >> system;
-
-        handle_get_system(system);
-        break;
-    }
-    case MessageType::GetMethod:
-    case MessageType::test:
-        QString text;
-        in >> text;
-        qDebug() << text;
-        break;
-    }
+    qDebug() << "я че то получил";
 }
 
 void BackendBase::handle_get_system(QString sys)

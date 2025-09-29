@@ -26,7 +26,11 @@ void SystemManager::setSystem(SA::SystemData &data)
     auto [validSystem, message] = checkScheme(data);
     qDebug() << validSystem << message;
 
-    sysData = data;
+    if (validSystem)
+    {
+        sysData = data;
+        sendSystemToBack();
+    }
 }
 
 std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
@@ -97,7 +101,7 @@ std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
 
     qDebug() << "Launching command:" << "python" << args;
 
-    process.start("python", args);
+    process.start("py", args);
 
     if (!process.waitForStarted(5000))
     {
@@ -172,4 +176,18 @@ void SystemManager::connectSystemSettings(std::shared_ptr<SystemSettings> scheme
 
     connect(schemeWid, &SystemSettings::setSystem, this, &SystemManager::setSystem);
     connect(schemeWid, &QWidget::destroyed, this, [this]() { schemeWid = nullptr; });
+}
+
+void SystemManager::sendSystemToBack()
+{
+    if (sysData.scheme == "")
+    {
+        qCritical() << "Scheme not set";
+        return;
+    }
+
+    QByteArray buffer;
+    QDataStream stream(&buffer, QIODevice::WriteOnly);
+    stream << sysData;
+    emit sendSystemToBack_sig(MessageType::System, buffer);
 }

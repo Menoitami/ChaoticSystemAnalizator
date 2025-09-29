@@ -28,25 +28,13 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     ui->verticalLayout->addLayout(mainStackedLayout);
 
     systemManager = SystemManager::instance();
+    m_frontend = FrontendBase::instance();
+
+    connect(systemManager, &SystemManager::sendSystemToBack_sig, m_frontend, &FrontendBase::sendMessage);
 
     registerWidgets();
     addMenu();
     connects();
-
-    m_frontend = QSharedPointer<FrontendBase>::create("127.0.0.1", 8080);
-    //m_frontend->start();
-    QObject::connect(m_frontend.data(), &FrontendBase::dataReceived, [this](const QByteArray &data, const QHostAddress &from, quint16 port){
-        qDebug() << "Got" << data.size() << "bytes";
-        //m_frontend->sendMessage(data,from,port);
-    });
-    QObject::connect(m_frontend.data(), &FrontendBase::errorOccurred, [](const QString &e){
-        qWarning() << e;
-    });
-    // // if (!m_frontend->start()) {
-    // //     qFatal("Failed to start frontend");
-    // // }
-    // else qDebug() << "Front is listening";
-
 }
 
 MajorWidget::~MajorWidget() { delete ui; }
@@ -56,6 +44,7 @@ void MajorWidget::registerWidgets()
     FieldWidget::registerWidget<ExampleWidget>(SA::CustomWidgets::ExampleWidget);
     FieldWidget::registerWidget<SystemSettings>(SA::CustomWidgets::SystemSettings);
     FieldWidget::registerWidget<PhasePortrait3D>(SA::CustomWidgets::PhasePortrait3D);
+
     FieldWidget::registerWidget<PhasePortrait2D>(SA::CustomWidgets::PhasePortrait2D);
 }
 
