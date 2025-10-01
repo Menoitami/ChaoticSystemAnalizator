@@ -72,42 +72,52 @@ void Graphic2DWidget::initializeVTK()
 void Graphic2DWidget::setTrajectory(const QVector<QVector2D> &points)
 {
     currentPoints = points;
-    if (!vtkInitialized)
+    if (!vtkInitialized || !table || !chart)
         return;
 
     auto xArray = vtkFloatArray::SafeDownCast(table->GetColumnByName("X"));
     auto yArray = vtkFloatArray::SafeDownCast(table->GetColumnByName("Y"));
 
-    xArray->SetNumberOfTuples(0);
-    yArray->SetNumberOfTuples(0);
-
-    if (points.size() < 2)
+    if (!xArray || !yArray)
     {
-        if (plot && chart)
-        {
-            chart->RemovePlotInstance(plot);
-            plot = nullptr;
-        }
-        table->Modified();
-        renderWindow->Render();
+        qWarning() << "X or Y column not found in table!";
         return;
     }
 
-    for (const auto &p : points)
+    // === 1. Сбросить оси в автоматический режим ===
+    auto xAxis = chart->GetAxis(vtkAxis::BOTTOM);
+    auto yAxis = chart->GetAxis(vtkAxis::LEFT);
+    xAxis->SetBehavior(vtkAxis::AUTO);
+    yAxis->SetBehavior(vtkAxis::AUTO);
+
+    // === 2. Очистить и заполнить данные ===
+    xArray->Reset();
+    xArray->ClearLookup();
+    yArray->Reset();
+    xArray->ClearLookup();
+    xArray->SetNumberOfTuples(points.size());
+    yArray->SetNumberOfTuples(points.size());
+
+    for (int i = 0; i < points.size(); ++i)
     {
-        xArray->InsertNextValue(p.x());
-        yArray->InsertNextValue(p.y());
+        xArray->SetValue(i, points[i].x());
+        yArray->SetValue(i, points[i].y());
     }
 
+    // === 3. Обновить график ===
     if (!plot)
     {
         plot = chart->AddPlot(vtkChart::LINE);
-        plot->SetInputData(table, "X", "Y");
         plot->SetColorF(0, 0, 1.0);
     }
 
-    chart->RecalculateBounds();
+    // ⚠️ ОБЯЗАТЕЛЬНО: перепривязать данные, даже если plot уже существует!
+    plot->SetInputData(table, "X", "Y");
+
+    // === 4. Пересчитать границы и отрисовать ===
     table->Modified();
+    chart->RecalculateBounds(); // теперь работает, потому что оси в AUTO
+    chart->Update();
     renderWindow->Render();
 }
 
@@ -139,6 +149,9 @@ void Graphic2DWidget::handleDoubleClick()
     // Получаем массивы данных
     auto xArray = vtkFloatArray::SafeDownCast(table->GetColumnByName("X"));
     auto yArray = vtkFloatArray::SafeDownCast(table->GetColumnByName("Y"));
+
+    xArray->Modified();
+    yArray->Modified();
 
     if (resetX && xArray && xArray->GetNumberOfTuples() > 0)
     {
