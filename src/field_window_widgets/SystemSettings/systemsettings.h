@@ -28,6 +28,10 @@ class SystemSettings : public BaseWidget
 
     void tryToSetSystem();
 
+  public slots:
+
+    void setMessage(const QString &message);
+
   signals:
 
     void setSystem(SystemData &);

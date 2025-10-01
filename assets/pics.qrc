@@ -46,5 +46,6 @@
         <file>icons/mainIcon/LetiIcon.png</file>
         <file>icons/buttonIcons/system.svg</file>
         <file>icons/figureBracket.svg</file>
+        <file>icons/batman.png</file>
     </qresource>
 </RCC>

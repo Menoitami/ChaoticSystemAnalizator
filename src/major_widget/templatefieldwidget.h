@@ -91,4 +91,7 @@ class TemplateFieldWidget : public QWidget, public std::enable_shared_from_this<
     void resizeRelease(std::shared_ptr<TemplateFieldWidget>, const QPoint &newPos, const QSize &newSize);
 
     void openWidget(BaseWidget *wid);
+
+    void startLoading();
+    void stopLoading();
 };

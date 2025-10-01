@@ -18,9 +18,13 @@ TemplateFieldWidget::TemplateFieldWidget(QWidget *parent) : QWidget(parent), ui(
 
     ui->verticalLayout_2->setAlignment(Qt::AlignTop);
     ui->verticalLayout_3->setAlignment(Qt::AlignTop);
-    //makeShadow(this);
+    // makeShadow(this);
     setMouseTracking(true);
     ui->HeadingH3->installEventFilter(this);
+
+    ui->widget_loading->setPixmap(QPixmap("://icons/batman.png"));
+    connect(this, &TemplateFieldWidget::startLoading, ui->widget_loading, &RotatingImageWidget::startRotation);
+    connect(this, &TemplateFieldWidget::stopLoading, ui->widget_loading, &RotatingImageWidget::stopRotation);
 }
 
 TemplateFieldWidget::~TemplateFieldWidget()
@@ -54,6 +58,9 @@ void TemplateFieldWidget::setBaseWidget(std::shared_ptr<BaseWidget> ptr)
     connect(this, &TemplateFieldWidget::saveSig, ptr.get(), &BaseWidget::saveSig);
     connect(ptr.get(), &BaseWidget::openWidget, this, &TemplateFieldWidget::openWidget);
     connect(ptr.get(), &BaseWidget::enableSave, this, &TemplateFieldWidget::enableSaveBtn);
+    connect(ptr.get(), &BaseWidget::enableSave, this, &TemplateFieldWidget::enableSaveBtn);
+    connect(ptr.get(), &BaseWidget::startLoading, this, &TemplateFieldWidget::startLoading);
+    connect(ptr.get(), &BaseWidget::stopLoading, this, &TemplateFieldWidget::stopLoading);
     connect(ptr.get(), &BaseWidget::destroySig, this,
             [weakThis = weak_from_this()]()
             {
@@ -75,7 +82,7 @@ QSize TemplateFieldWidget::baseMinimumSize() const
     return wid->minimumSize() +
            QSize(this->layout()->contentsMargins().left() + this->layout()->contentsMargins().right(),
                  this->layout()->contentsMargins().top() + this->layout()->contentsMargins().bottom() +
-                     ui->CancelButton->height() + ui->HeadingH3->height());
+                     ui->CancelButton->height() + ui->HeadingH3->height() + ui->widget_loading->height());
 };
 
 void TemplateFieldWidget::startDrag()
@@ -265,6 +272,7 @@ void TemplateFieldWidget::mouseReleaseEvent(QMouseEvent *event)
         unsetCursor();
         event->accept();
     }
+
     QWidget::mouseReleaseEvent(event);
 }
 

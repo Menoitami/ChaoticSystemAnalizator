@@ -17,7 +17,7 @@ QStringList SystemSettings::getTitle() const { return {"Настройки", "Р
 
 void SystemSettings::tryToSetSystem()
 {
-
+    setMessage("");
     schemeData.scheme = ui->widget->getScheme();
     schemeData.h = ui->lineEdit_h->text().toDouble();
 
@@ -40,7 +40,7 @@ void SystemSettings::tryToSetSystem()
         }
         else
         {
-            ui->label_messages->setText("Неправильно введены значения начальной позиции");
+            setMessage("Неправильно введены значения начальной позиции");
             return;
         }
     }
@@ -58,10 +58,12 @@ void SystemSettings::tryToSetSystem()
         }
         else
         {
-            ui->label_messages->setText("Неправильно введены значения параметров");
+            setMessage("Неправильно введены значения параметров");
             return;
         }
     }
 
     emit setSystem(schemeData);
 }
+
+void SystemSettings::setMessage(const QString &message) { ui->label_messages->setText(message); }

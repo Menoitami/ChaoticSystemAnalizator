@@ -15,15 +15,15 @@ class BaseWidget : public QWidget
 {
     Q_OBJECT
   public:
-    explicit BaseWidget( SA::CustomWidgets name, QWidget *parent = nullptr);
-     SA::CustomWidgets getName() const { return name; };
+    explicit BaseWidget(SA::CustomWidgets name, QWidget *parent = nullptr);
+    SA::CustomWidgets getName() const { return name; };
     virtual ~BaseWidget();
 
     virtual QStringList getTitle() const = 0;
     bool canResize = true;
 
   protected:
-     SA::CustomWidgets name;
+    SA::CustomWidgets name;
 
     void connectAllWidgetsToSaveBtn(QWidget *widgetContainer);
 
@@ -41,4 +41,7 @@ class BaseWidget : public QWidget
     void resizeRequest(const QPoint &newPos, const QSize &newSize);
 
     void openWidget(BaseWidget *wid);
+
+    void startLoading();
+    void stopLoading();
 };
