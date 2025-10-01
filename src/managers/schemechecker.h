@@ -17,10 +17,6 @@ class SchemeChecker : public QObject
   signals:
     void checked(bool success, QString message);
 
-  private slots:
-    void onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus);
-    void onProcessError(QProcess::ProcessError error);
-
   private:
     SystemData m_data;
     QString m_tempFilePath;

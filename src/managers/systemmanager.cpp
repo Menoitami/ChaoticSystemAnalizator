@@ -53,6 +53,7 @@ void SystemManager::setSystem(SystemData &data)
     emit startLoading();
     emit setMessage("Validating scheme...");
     testData = data;
+
     emit requestCheck(data);
 }
 
@@ -79,7 +80,6 @@ void SystemManager::connectSystemSettings(std::shared_ptr<SystemSettings> scheme
 
     connect(schemeWid, &SystemSettings::setSystem, this, &SystemManager::setSystem);
     connect(schemeWid, &QWidget::destroyed, this, [this]() { schemeWid = nullptr; });
-    connect(schemeWid, &SystemSettings::setSystem, this, &SystemManager::setSystem);
     connect(this, &SystemManager::setMessage, schemeWid, &SystemSettings::setMessage);
     connect(this, &SystemManager::stopLoading, schemeWid, &SystemSettings::stopLoading);
     connect(this, &SystemManager::startLoading, schemeWid, &SystemSettings::startLoading);

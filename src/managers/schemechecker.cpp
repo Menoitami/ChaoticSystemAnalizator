@@ -1,5 +1,5 @@
 #include "schemechecker.h"
-#include "config.h" // для PYTHON_SCHEME_SCRIPT
+#include "config.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -23,11 +23,6 @@ void SchemeChecker::check(const SystemData &data)
     {
         emit checked(false, "Parameters a[] are not set");
     }
-
-    // Debug output
-    qDebug() << "startPos:" << data.inits;
-    qDebug() << "params:" << data.params;
-    qDebug() << "h:" << data.h;
 
     // --- 2. Prepare data for script ---
     QString aStr;
@@ -123,52 +118,4 @@ void SchemeChecker::check(const SystemData &data)
         }
         emit checked(false, errorMsg);
     }
-}
-
-void SchemeChecker::onProcessFinished(int exitCode, QProcess::ExitStatus exitStatus)
-{
-    Q_UNUSED(exitStatus)
-
-    QByteArray stdoutData = m_process->readAllStandardOutput();
-    QByteArray stderrData = m_process->readAllStandardError();
-    QString stdoutStr = QString::fromUtf8(stdoutData).trimmed();
-    QString stderrStr = QString::fromUtf8(stderrData).trimmed();
-
-    qDebug() << "Python stdout (thread):" << stdoutStr;
-    qDebug() << "Python stderr (thread):" << stderrStr;
-
-    bool success = false;
-    QString message;
-
-    if (exitCode == 0 && (stdoutStr.contains("CHECK SUCCESSFUL", Qt::CaseInsensitive) ||
-                          stdoutStr.contains("SUCCESS", Qt::CaseInsensitive) ||
-                          stdoutStr.contains("completed successfully", Qt::CaseInsensitive)))
-    {
-        success = true;
-        message = "Validation successful";
-    }
-    else
-    {
-        message = stderrStr.isEmpty() ? QString("Script failed with exit code %1").arg(exitCode)
-                                      : "Script execution failed:\n" + stderrStr;
-    }
-
-    emit checked(success, message);
-
-    // Очистка
-    delete m_process;
-    m_process = nullptr;
-    QFile::remove(m_tempFilePath);
-}
-
-void SchemeChecker::onProcessError(QProcess::ProcessError error)
-{
-    Q_UNUSED(error)
-    emit checked(false, "Process error occurred during validation.");
-    if (m_process)
-    {
-        delete m_process;
-        m_process = nullptr;
-    }
-    QFile::remove(m_tempFilePath);
 }
