@@ -21,12 +21,12 @@ void SystemSettings::tryToSetSystem()
     schemeData.scheme = ui->widget->getScheme();
     schemeData.h = ui->lineEdit_h->text().toDouble();
 
-    schemeData.startPos.clear();
+    schemeData.inits.clear();
     schemeData.params.clear();
 
     const QStringList poses = ui->lineEdit_startPos->text().split(",");
 
-    schemeData.startPos.reserve(poses.length());
+    schemeData.inits.reserve(poses.length());
 
     bool ok;
     double value;
@@ -36,7 +36,7 @@ void SystemSettings::tryToSetSystem()
         value = pos.trimmed().toDouble(&ok);
         if (ok)
         {
-            schemeData.startPos.push_back(value);
+            schemeData.inits.push_back(value);
         }
         else
         {

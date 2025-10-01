@@ -40,9 +40,7 @@ target_link_libraries(ConnectionManager
 target_link_libraries(ConnectionManager
     PUBLIC AnalyticsBackend
 )
-if(WIN32)
-    target_link_libraries(ConnectionManager PRIVATE ws2_32)
-endif()
+
 
 install(TARGETS ConnectionManager DESTINATION lib)
 install(DIRECTORY include/ DESTINATION include)

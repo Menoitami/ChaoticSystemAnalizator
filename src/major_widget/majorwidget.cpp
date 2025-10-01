@@ -30,8 +30,6 @@ MajorWidget::MajorWidget(QWidget *parent) : QWidget(parent), ui(new Ui::MajorWid
     systemManager = SystemManager::instance();
     m_frontend = FrontendBase::instance();
 
-    connect(systemManager, &SystemManager::sendSystemToBack_sig, m_frontend, &FrontendBase::sendMessage);
-
     registerWidgets();
     addMenu();
     connects();
@@ -82,4 +80,6 @@ void MajorWidget::connectButtonAndBaseWidget(const std::shared_ptr<QToolButton> 
 void MajorWidget::connects()
 {
     connect(menuWid.get(), &MenuWidget::createWidget, mainField.get(), &FieldWidget::createWidget);
+
+    connect(systemManager, &SystemManager::sendData, m_frontend, &FrontendBase::sendMessage);
 }

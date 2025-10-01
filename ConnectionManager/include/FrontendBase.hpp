@@ -16,10 +16,10 @@ class FrontendBase : public QObject
     static FrontendBase *instance();
 
   public slots:
-    void processMessage(MessageType type, const QByteArray &data);
+    void processMessage(MessageType type, QByteArray &data);
 
   signals:
-    void sendMessage(MessageType type, const QByteArray &data);
+    void sendMessage(MessageType type, QByteArray &data);
 
   private:
     explicit FrontendBase(QObject *parent = nullptr);

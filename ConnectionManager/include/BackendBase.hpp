@@ -15,12 +15,13 @@ class BackendBase : public QObject
     static BackendBase *instance();
 
   public slots:
-    void processMessage(MessageType type, const QByteArray &data);
+    void processMessage(MessageType type, QByteArray &data);
 
   signals:
-    void sendMessage(MessageType type, const QByteArray &data);
+    void sendMessage(MessageType type, QByteArray &data);
 
     void handle_get_system(QString sys);
+
   private:
     explicit BackendBase(QObject *parent = nullptr);
     ~BackendBase() override;

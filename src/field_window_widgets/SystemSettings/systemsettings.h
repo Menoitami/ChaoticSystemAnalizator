@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ConnectionTypes.hpp"
 #include "basewidget.h"
 #include "differencescheme.h"
 #include <QWidget>
@@ -21,7 +22,7 @@ class SystemSettings : public BaseWidget
 
   private:
     Ui::SystemSettings *ui;
-    SA::SystemData schemeData;
+    SystemData schemeData;
 
   private slots:
 
@@ -29,5 +30,5 @@ class SystemSettings : public BaseWidget
 
   signals:
 
-    void setSystem(SA::SystemData &);
+    void setSystem(SystemData &);
 };

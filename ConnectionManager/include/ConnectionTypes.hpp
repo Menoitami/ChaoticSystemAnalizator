@@ -2,13 +2,18 @@
 
 #include <QByteArray>
 #include <QDataStream>
+#include <QList>
+#include <QString>
 
 enum class MessageType : int
 {
     Unknown = 0,
     SendSingleAttractorPoint,
     SendAllAttractorPoints,
-    System,
+    SendSheme,
+    SendParams,
+    SendInits,
+    SendH,
     GetMethod,
     test
 };
@@ -34,3 +39,29 @@ inline QDataStream &operator>>(QDataStream &in, MessageType &mt)
     }
     return in;
 }
+
+struct SystemData
+{
+    QString scheme;
+    QList<double> inits;
+    QList<double> params;
+    double h;
+
+    friend inline QDataStream &operator<<(QDataStream &out, const SystemData &mt)
+    {
+        out << mt.scheme;
+        out << mt.inits;
+        out << mt.params;
+        out << mt.h;
+        return out;
+    }
+
+    friend inline QDataStream &operator>>(QDataStream &in, SystemData &mt)
+    {
+        in >> mt.scheme;
+        in >> mt.inits;
+        in >> mt.params;
+        in >> mt.h;
+        return in;
+    }
+};

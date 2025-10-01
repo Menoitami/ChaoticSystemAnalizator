@@ -18,4 +18,4 @@ FrontendBase::FrontendBase(QObject *parent) : QObject(parent) {}
 
 FrontendBase::~FrontendBase() {}
 
-void FrontendBase::processMessage(MessageType type, const QByteArray &data) {}
+void FrontendBase::processMessage(MessageType type, QByteArray &data) {}

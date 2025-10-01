@@ -1,6 +1,6 @@
 #pragma once
 
-#include "constants.hpp"
+#include "ConnectionTypes.hpp"
 #include "systemsettings.h"
 #include <ConnectionTypes.hpp>
 #include <QDataStream>
@@ -21,20 +21,19 @@ class SystemManager : public QObject
 
   private:
     SystemManager(QObject *parent = nullptr);
-    std::pair<bool, QString> checkScheme(SA::SystemData &);
+    std::pair<bool, QString> checkScheme(SystemData &);
 
     static SystemManager *m_instance;
 
-    SA::SystemData sysData;
+    SystemData sysData;
 
     SystemSettings *schemeWid = nullptr;
     void connectSystemSettings(std::shared_ptr<SystemSettings> schemeWid_);
 
   private slots:
 
-    void setSystem(SA::SystemData &);
-    void sendSystemToBack();
+    void setSystem(SystemData &);
 
   signals:
-    void sendSystemToBack_sig(MessageType type, const QByteArray &data);
+    void sendData(MessageType type, QByteArray &data);
 };

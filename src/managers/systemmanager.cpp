@@ -21,19 +21,52 @@ SystemManager *SystemManager::instance()
     return m_instance;
 }
 
-void SystemManager::setSystem(SA::SystemData &data)
+void SystemManager::setSystem(SystemData &data)
 {
     auto [validSystem, message] = checkScheme(data);
     qDebug() << validSystem << message;
 
-    if (validSystem)
+    if (!validSystem)
     {
-        sysData = data;
-        sendSystemToBack();
+        return;
     }
+
+    if (sysData.h != data.h)
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream << data.h;
+        emit sendData(MessageType::SendH, buffer);
+    }
+
+    if (sysData.params != data.params)
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream << data.params;
+        emit sendData(MessageType::SendParams, buffer);
+    }
+
+    if (sysData.inits != data.inits)
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream << data.inits;
+        emit sendData(MessageType::SendInits, buffer);
+    }
+
+    if (sysData.scheme != data.scheme)
+    {
+        QByteArray buffer;
+        QDataStream stream(&buffer, QIODevice::WriteOnly);
+        stream << data.scheme;
+        emit sendData(MessageType::SendSheme, buffer);
+    }
+
+    sysData = data;
 }
 
-std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
+std::pair<bool, QString> SystemManager::checkScheme(SystemData &data)
 {
     if (data.scheme.trimmed().isEmpty())
     {
@@ -43,7 +76,7 @@ std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
     {
         return {false, "Integration step h must be positive"};
     }
-    if (data.startPos.empty())
+    if (data.inits.empty())
     {
         return {false, "Initial conditions are not set"};
     }
@@ -53,7 +86,7 @@ std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
     }
 
     // Debug output
-    qDebug() << "startPos:" << data.startPos;
+    qDebug() << "startPos:" << data.inits;
     qDebug() << "params:" << data.params;
     qDebug() << "h:" << data.h;
 
@@ -67,11 +100,11 @@ std::pair<bool, QString> SystemManager::checkScheme(SA::SystemData &data)
     }
 
     QString xStr;
-    for (size_t i = 0; i < data.startPos.size(); ++i)
+    for (size_t i = 0; i < data.inits.size(); ++i)
     {
         if (i > 0)
             xStr += ",";
-        xStr += QString::number(data.startPos[i], 'g', 15);
+        xStr += QString::number(data.inits[i], 'g', 15);
     }
 
     QString hStr = QString::number(data.h, 'g', 15);
@@ -176,18 +209,4 @@ void SystemManager::connectSystemSettings(std::shared_ptr<SystemSettings> scheme
 
     connect(schemeWid, &SystemSettings::setSystem, this, &SystemManager::setSystem);
     connect(schemeWid, &QWidget::destroyed, this, [this]() { schemeWid = nullptr; });
-}
-
-void SystemManager::sendSystemToBack()
-{
-    if (sysData.scheme == "")
-    {
-        qCritical() << "Scheme not set";
-        return;
-    }
-
-    QByteArray buffer;
-    QDataStream stream(&buffer, QIODevice::WriteOnly);
-    stream << sysData;
-    emit sendSystemToBack_sig(MessageType::System, buffer);
 }
