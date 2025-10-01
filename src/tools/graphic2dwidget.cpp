@@ -3,12 +3,15 @@
 // VTK includes
 #include <QVTKOpenGLNativeWidget.h>
 #include <vtkAxis.h>
+#include <vtkCallbackCommand.h>
 #include <vtkChartXY.h>
+#include <vtkContext2D.h>
 #include <vtkContextScene.h>
 #include <vtkContextView.h>
 #include <vtkFloatArray.h>
 #include <vtkGenericOpenGLRenderWindow.h>
 #include <vtkPlot.h>
+#include <vtkRect.h>
 #include <vtkTable.h>
 
 #include <QTextStream>
@@ -42,13 +45,11 @@ void Graphic2DWidget::initializeVTK()
     view = vtkNew<vtkContextView>();
     view->SetRenderWindow(renderWindow);
 
-    chart = vtkNew<vtkChartXY>(); // сохраните chart как член класса!
+    chart = vtkNew<vtkChartXY>();
     view->GetScene()->AddItem(chart);
 
     chart->GetAxis(vtkAxis::LEFT)->SetVisible(true);
     chart->GetAxis(vtkAxis::BOTTOM)->SetVisible(true);
-    chart->GetAxis(vtkAxis::LEFT)->SetGridVisible(true);
-    chart->GetAxis(vtkAxis::BOTTOM)->SetGridVisible(true);
 
     table = vtkNew<vtkTable>();
     auto xArray = vtkNew<vtkFloatArray>();
@@ -58,13 +59,13 @@ void Graphic2DWidget::initializeVTK()
     table->AddColumn(xArray);
     table->AddColumn(yArray);
 
-    // НЕ добавляем plot здесь!
-    plot = nullptr;
-
-    chart->SetShowLegend(false);
-    chart->SetAutoAxes(true);
-
     renderWindow->GetInteractor()->Initialize();
+
+    auto doubleClickCallback = vtkSmartPointer<vtkCallbackCommand>::New();
+    doubleClickCallback->SetCallback(DoubleClickCallback);
+    doubleClickCallback->SetClientData(this);
+    renderWindow->GetInteractor()->AddObserver(vtkCommand::LeftButtonDoubleClickEvent, doubleClickCallback);
+
     vtkInitialized = true;
 }
 
@@ -82,7 +83,6 @@ void Graphic2DWidget::setTrajectory(const QVector<QVector2D> &points)
 
     if (points.size() < 2)
     {
-        // Удаляем или скрываем существующий график
         if (plot && chart)
         {
             chart->RemovePlotInstance(plot);
@@ -99,15 +99,67 @@ void Graphic2DWidget::setTrajectory(const QVector<QVector2D> &points)
         yArray->InsertNextValue(p.y());
     }
 
-    // Создаём график только если его нет
     if (!plot)
     {
         plot = chart->AddPlot(vtkChart::LINE);
         plot->SetInputData(table, "X", "Y");
-        plot->SetColorF(0, 0, 1.0); // синий (в диапазоне 0.0–1.0)
+        plot->SetColorF(0, 0, 1.0);
     }
 
     chart->RecalculateBounds();
+    table->Modified();
+    renderWindow->Render();
+}
+
+void Graphic2DWidget::DoubleClickCallback(vtkObject *, unsigned long eventId, void *clientData, void *)
+{
+    if (eventId == vtkCommand::LeftButtonDoubleClickEvent)
+    {
+        static_cast<Graphic2DWidget *>(clientData)->handleDoubleClick();
+    }
+}
+
+void Graphic2DWidget::handleDoubleClick()
+{
+    if (!renderWindow || !table || currentPoints.isEmpty())
+        return;
+
+    int *eventPos = renderWindow->GetInteractor()->GetEventPosition();
+    int x = eventPos[0];
+    int y = eventPos[1];
+
+    const int margin = 40;
+
+    bool resetX = (y <= margin); // клик внизу → сброс оси X
+    bool resetY = (x <= margin); // клик слева → сброс оси Y
+
+    if (!resetX && !resetY)
+        return;
+
+    // Получаем массивы данных
+    auto xArray = vtkFloatArray::SafeDownCast(table->GetColumnByName("X"));
+    auto yArray = vtkFloatArray::SafeDownCast(table->GetColumnByName("Y"));
+
+    if (resetX && xArray && xArray->GetNumberOfTuples() > 0)
+    {
+        double range[2];
+        xArray->GetRange(range);
+
+        auto xAxis = chart->GetAxis(vtkAxis::BOTTOM);
+        xAxis->SetMinimum(static_cast<float>(range[0]));
+        xAxis->SetMaximum(static_cast<float>(range[1]));
+    }
+
+    if (resetY && yArray && yArray->GetNumberOfTuples() > 0)
+    {
+        double range[2];
+        yArray->GetRange(range);
+
+        auto yAxis = chart->GetAxis(vtkAxis::LEFT);
+        yAxis->SetMinimum(static_cast<float>(range[0]));
+        yAxis->SetMaximum(static_cast<float>(range[1]));
+    }
+
     table->Modified();
     renderWindow->Render();
 }

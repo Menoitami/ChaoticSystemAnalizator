@@ -37,4 +37,7 @@ class Graphic2DWidget : public QWidget
 
     QVector<QVector2D> currentPoints;
     bool vtkInitialized = false;
+    void handleDoubleClick();
+
+    static void DoubleClickCallback(vtkObject *, unsigned long eventId, void *clientData, void *);
 };
